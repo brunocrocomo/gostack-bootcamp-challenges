@@ -30,7 +30,7 @@ export default class Repository extends Component {
 
     async componentDidMount() {
         const { match } = this.props;
-        const { filters } = this.state;
+        const { filters, filterIndex } = this.state;
 
         const repoName = decodeURIComponent(match.params.repository);
 
@@ -38,7 +38,7 @@ export default class Repository extends Component {
             api.get(`/repos/${repoName}`),
             api.get(`/repos/${repoName}/issues`, {
                 params: {
-                    state: filters[0].state,
+                    state: filters[filterIndex].state,
                     per_page: 5,
                 },
             }),
